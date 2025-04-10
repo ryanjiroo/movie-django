@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}{{ movie.name }} Details{% endblock %}
+
+{% block content %}
+<section class="py-10 px-5">
+    <!-- Back to Movies link -->
+    <div class="mt-6 text-left">
+        <a href="{% url 'home' %}" class="text-blue-500 hover:underline">← Back to Movies</a>
+    </div>
+
+    <div class="flex flex-col md:flex-row items-center max-w-4xl mx-auto mt-8">
+        <!-- Image section with fixed height for vertical poster -->
+        <img src="{{ movie.imgPath }}" alt="{{ movie.name }}" class="w-auto h-[700px] mb-6 md:mb-0 md:mr-6 object-cover">
+
+        <!-- Movie details section -->
+        <div class="md:max-w-lg">
+            <h1 class="text-4xl font-bold mb-4">{{ movie.name }}</h1>
+
+            <p class="text-gray-600 mb-2"><strong>Duration:</strong> {{ movie.duration }} min</p>
+            <p class="text-gray-600 mb-2"><strong>Language:</strong> {{ movie.language|default:"-" }}</p>
+            <p class="text-gray-600 mb-2"><strong>Genre:</strong> {{ movie.genre|join:", " }}</p>
+            <p class="text-gray-600 mb-2"><strong>MPAA Rating:</strong> {{ movie.mpaaRating.type }} - {{ movie.mpaaRating.label|default:"-" }}</p>
+
+            <p class="text-yellow-500 font-bold mb-4"><strong>User Rating:</strong> {{ movie.userRating }}/5</p>
+
+            <!-- Add Description label -->
+            <p class="font-semibold text-lg mt-4 mb-2">Description:</p>
+            <p class="text-gray-800">{{ movie.description|safe }}</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
